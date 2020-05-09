@@ -10,7 +10,6 @@ def home():
     quote_response = requests.get(random_quote_url) 
     quote_data = quote_response.json()
     return render_template('home.html', title='Home', quote_data = quote_data)
-    <--->
 
 @main.route("/about")
 def about():
