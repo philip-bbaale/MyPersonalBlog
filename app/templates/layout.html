@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+        <title>YourBlog - {{ title }}</title>
+    {% else %}
+        <title>YourBlog</title>
+    {% endif %}
+    <link rel="icon" href="{{url_for('static', filename='icons8-blog.png')}}" type="image/gif" sizes="50x50">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Chelsea+Market|Knewave|Marck+Script&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: #fff275;">
+    <div class="">
+        <h2 class="text-center display-4 head_text" style="font-family: 'Marck Script', cursive;">YourBlog</h2>
+    </div>
+    <nav class="nav navbar navbar-expand-lg navbar-dark bg-light sticky-top shadow-lg">
+        <a class="navbar-brand text-dark" href="#"><h2>YourBlog</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon bg-secondary" ></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link text-dark" href="{{ url_for('main.home')}}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{{ url_for('main.about') }}">About</a>
+              </li>
+            </ul>
+          </div>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link text-dark" href="">Login</a>
+            <a class="nav-item nav-link text-dark" href="">Register</a>
+        </div>
+        </div>
+    </nav>
+
+      <div class="container-fluid">
+        {% block content %}{% endblock %}
+      </div>
+</body>
+</html>
+<--->

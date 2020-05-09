@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron bg-secondary">
+        <h1 class="display-4 text-center text-light">About YourBlog</h1>
+        <hr class="my-4 bg-warning">
+        <p class="lead text-center text-light"><span class="text-light h2">YourBlog</span> is a personal blogging website where you can create and share your opinions and other users can read and comment on them. Additionally, add a feature that displays random quotes to inspire your users. </p>
+        <hr class="my-4 bg-warning">
+        <div class="row contact_us text-center">
+            <div class="col-md-12">
+              <h3 class="text-light" id="m2">CONTACT US.</h3>
+            </div>
+            <div class="col-md-12">
+                <a href="https://www.facebook.com/profile.php?id=100006079969163" class="btn" target="blank">
+                    <img src="{{ url_for('static', filename='facebookicon.png') }}">
+                </a>
+                <a href="Tel: +254758657828" class="btn">
+                    <img src="{{ url_for('static', filename='tellicon.png') }}">
+                </a>
+                <a href="https://wa.me/256756522631" class="btn" target="blank">
+                    <img src="{{ url_for('static', filename='whatsappicon.png') }}">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<--->
