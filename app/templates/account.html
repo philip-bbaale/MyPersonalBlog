@@ -1,0 +1,66 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+<div class="container mt-4">
+<div class="row">
+<!-- displaying  Username-->
+  <div class="col-md-6">
+    <h3> {{user.username| capitalize}} </h3>
+
+    <!--Displaying user bio-->
+    {% if user.bio %}
+      <p> {{user.bio}}</p>
+    {%else%}
+      <p> {{user.username| capitalize}} has no bio </p>
+    {% endif %}
+
+    {% if user == current_user %}
+        <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+    {% endif %}
+
+  </div>
+
+  <!--Display profile photo-->
+  <div class="col-md-6">
+    {% if user.image_file %}
+
+    <img src="{{url_for('static',filename=user.image_file)}}" alt="" class="img-thumbnail ">
+
+    {%else%}
+    <p>No profile picture</p>
+
+    {% endif %}
+
+        {% if user == current_user %}
+    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="POST" enctype = "multipart/form-data">
+
+      <input type="file"  name="photo" class="form-control" required><br>
+      <input type="submit">
+    </form>
+      {% endif %}
+  </div>
+  
+    
+</div>
+<br><br>
+<div class="row">
+  <h1>Blogs...</h1>
+  {% for post in posts %}
+  <div class="card mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-8">
+        <div class="card-body">
+            <span class="mr-2 card-title" href="#">{{ post.author.username }}</span>
+            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            <h2><a class="article-title text-primary" href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <hr>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+{% endblock %}
+<!!!!!>
