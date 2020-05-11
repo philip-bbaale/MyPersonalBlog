@@ -20,6 +20,12 @@
           <div class="card mb-3 bg-dark">
             <div class="row no-gutters">
               <div class="col-md-4">
+                {% if post.author.image_file %}
+                <img src="{{url_for('static',filename=post.author.image_file)}}" class=" img-fluid img-thumbnail card-img rounded-circle mx-auto d-block mt-3"  style="height: 150px; width: 150px;" alt="Please add image">
+                {%else%}
+                <p class="text-center mt-3 text-secondary">No profile picture</p>
+            
+                {% endif %}
               </div>
               <div class="col-md-8">
                 <div class="card-body">
