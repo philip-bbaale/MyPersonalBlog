@@ -5,12 +5,14 @@ from flask_uploads import UploadSet,configure_uploads,IMAGES
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+from flask_simplemde import SimpleMDE
 
 
 db = SQLAlchemy()
 photos = UploadSet('photos',IMAGES)
 bcrypt = Bcrypt()
 bootstrap = Bootstrap()
+simple = SimpleMDE()
 
 
 login_manager = LoginManager()
@@ -35,6 +37,7 @@ def create_app(config_name):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     bootstrap.init_app(app)
+    simple.init_app(app)
 
 
     return app

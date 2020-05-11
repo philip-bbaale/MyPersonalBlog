@@ -5,6 +5,7 @@ from ..models import User, Post, Comment
 from .forms import UpdateProfile,PostForm,CommentForm
 from .. import db,photos
 from flask_login import login_user, current_user, logout_user, login_required
+import markdown2  
 
 
 

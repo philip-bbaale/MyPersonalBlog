@@ -51,9 +51,13 @@
         </div>
         <h4 class="ml-2">Comments.</h4>
         <div class="row container">
-            {%for comment in comments%}
-                <h5 class="ml-2"> username : {{comment.content}}</h5>
-            {%endfor%}
+            <ul>
+            {% for comment in post.comments %}
+                    <li>
+                        <p>{{comment.user_id.username}}: {{ comment.content }}<br></p>
+                    </li>
+            {% endfor %}
+            </ul>
         </div>
     </div>
 {% endblock content %}
