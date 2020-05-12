@@ -6,6 +6,13 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
+from flask_mail import Mail
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 
 
 db = SQLAlchemy()
@@ -13,6 +20,7 @@ photos = UploadSet('photos',IMAGES)
 bcrypt = Bcrypt()
 bootstrap = Bootstrap()
 simple = SimpleMDE()
+mail = Mail()
 
 
 login_manager = LoginManager()
@@ -29,6 +37,9 @@ def create_app(config_name):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    from .emails import email as email_blueprint
+    app.register_blueprint(email_blueprint)
+
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix='/authenticate')
 
@@ -38,6 +49,6 @@ def create_app(config_name):
     login_manager.init_app(app)
     bootstrap.init_app(app)
     simple.init_app(app)
-
+    mail.init_app(app)
 
     return app

@@ -2,21 +2,35 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from . import main
 import requests
 from ..models import User, Post, Comment
-from .forms import UpdateProfile,PostForm,CommentForm
+from .forms import UpdateProfile,PostForm,CommentForm,subscription_form
 from .. import db,photos
 from flask_login import login_user, current_user, logout_user, login_required
 import markdown2  
+from flask_mail import Message
+from .. import mail, MAIL_USERNAME
 
 
 
-@main.route("/")
-@main.route("/home")
+
+@main.route("/", methods=['GET', 'POST'])
+@main.route("/home", methods=['GET', 'POST'])
 def home():
     random_quote_url = 'http://quotes.stormconsultancy.co.uk/random.json'
     quote_response = requests.get(random_quote_url) 
     quote_data = quote_response.json()
     posts = Post.query.order_by(Post.date_posted.desc())
-    return render_template('home.html', title='Home', quote_data = quote_data, posts=posts)
+
+    form = subscription_form()
+    if form.validate_on_submit():
+        subemail = form.email.data
+        senderemail = MAIL_USERNAME
+        msg = Message('Hey there.',sender = senderemail,recipients = subemail)
+        msg.html = '<h2>Welcome to YourQuote.</h2> <p>YourBlog is a personal blogging website where you can create and share your opinions and other users can read and comment on them. Additionally, add a feature that displays random quotes to inspire your users.</p>'
+        mail.send(msg)
+        flash('You have been added to our subscription', 'success')
+        return redirect(url_for('main.home'))
+    
+    return render_template('home.html', title='Home', quote_data = quote_data, posts=posts, form=form)
 
 @main.route("/about")
 def about():

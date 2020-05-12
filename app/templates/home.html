@@ -2,45 +2,71 @@
 {% block content %}
     {% if quote_data %}
       <div class="container">
+        <div class="row mt-3">
 
-        <div class="card mt-2 ">
-          <div class="card-header">
-            Random Quote
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <p class="text-dark">{{quote_data.quote}}</p>
-              <footer class="blockquote-footer">Author:<cite title="Source Title">{{quote_data.author}}</cite></footer>
-            </blockquote>
-          </div>
-        </div>
+          <div class="col-md-4">
 
-        <div class="mt-5">
-          {% for post in posts %}
-          <div class="card mb-3 bg-dark">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                {% if post.author.image_file %}
-                <img src="{{url_for('static',filename=post.author.image_file)}}" class=" img-fluid img-thumbnail card-img rounded-circle mx-auto d-block mt-3"  style="height: 150px; width: 150px;" alt="Please add image">
-                {%else%}
-                <p class="text-center mt-3 text-secondary">No profile picture</p>
-            
-                {% endif %}
+            <div class="card mt-2 ">
+              <div class="card-header">
+                Random Quote
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <a class="mr-2 card-title font-italic font-weight-bolder" href="{{ url_for('main.account',uname=post.author.username) }}">{{ post.author.username }}</a>
-                  <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                  <h2><a class="article-title text-primary" href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-                  <hr class="bg-warning">
-                  <p class="article-content text-light">{{ post.content }}</p>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p class="text-dark">{{quote_data.quote}}</p>
+                  <footer class="blockquote-footer">Author:<cite title="Source Title">{{quote_data.author}}</cite></footer>
+                </blockquote>
+              </div>
+            </div>
+
+            <form method="POST" action="" class="mt-4 border-bottom border-top border-danger">
+              <div class="form-group mt-3">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            </form>
+
+          </div>
+         
+  
+          <div class="mt-5 col-md-8">
+            {% for post in posts %}
+            <div class="card mb-3 bg-dark">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                  {% if post.author.image_file %}
+                  <img src="{{url_for('static',filename=post.author.image_file)}}" class=" img-fluid img-thumbnail card-img rounded-circle mx-auto d-block mt-3"  style="height: 150px; width: 150px;" alt="Please add image">
+                  {%else%}
+                  <p class="text-center mt-3 text-secondary">No profile picture</p>
+              
+                  {% endif %}
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <a class="mr-2 card-title font-italic font-weight-bolder" href="{{ url_for('main.account',uname=post.author.username) }}">{{ post.author.username }}</a>
+                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                    <h2><a class="article-title text-primary" href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                    <hr class="bg-warning">
+                    <p class="article-content text-light">{{ post.content }}</p>
+                  </div>
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
-          {% endfor %}
+
         </div>
-        
     </div>
     {% endif %}
 {% endblock %}
