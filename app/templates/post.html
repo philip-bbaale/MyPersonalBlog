@@ -44,8 +44,8 @@
                         <a href="/post/{{post.id}}?upvote=1"><button class="btn-xs btn-success mt-3">UPVOTE</button></a><span class="fa-2x mt-3 ml-1">{{post.upvotes}}</span>
                         <a class="ml-3" href="/post/{{post.id}}?downvote=1"><button class="btn-xs btn-danger mt-3">DOWNVOTE</button></a><span class="fa-2x mt-3 ml-1">{{post.downvotes}}</span>
                         <hr>
-                        {{ wtf.quick_form(form) }}
                     {% endif %}  
+                    {{ wtf.quick_form(form) }}
                 </div>
             </div>
         </div>
