@@ -5,7 +5,7 @@ A personal blogging website where you can create and share your opinions and oth
 > YourBlog is a personal blogging website where you can create and share your opinions and other users can read and comment on them. Additionally, add a feature that displays random quotes to inspire your users.
 
 # App Screenshot:
-<img src="">
+<img src="https://github.com/scrupycoco/MyPersonalBlog/blob/master/app/static/Screenshot%20.png">
 
 # Project Objectives:
 * Your project should have a functioning authentication system
